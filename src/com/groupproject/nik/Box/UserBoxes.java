@@ -1,6 +1,7 @@
 package com.groupproject.nik.Box;
 
 import com.groupproject.nik.Model.Account;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -52,8 +53,11 @@ public class UserBoxes {
         VBox leftLayout = new VBox(10);
         leftLayout.getChildren().addAll(inventoryButton);
 //      MAIN layout
+        BorderPane.setMargin(topLayout, new Insets(10, 10, 10, 10));
+        BorderPane.setMargin(leftLayout, new Insets(10, 10, 10, 10));
         BorderPane mainLayout = new BorderPane();
         mainLayout.setTop(topLayout);
+        mainLayout.setLeft(leftLayout);
 
 //      Scene options
         Scene mainScene = new Scene(mainLayout, 600, 400);
