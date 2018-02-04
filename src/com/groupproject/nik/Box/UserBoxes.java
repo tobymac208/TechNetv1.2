@@ -1,13 +1,15 @@
 package com.groupproject.nik.Box;
 
 import com.groupproject.nik.Model.Account;
+import com.groupproject.nik.Model.Product;
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -63,6 +65,9 @@ public class UserBoxes {
             boolean answer = ConfirmBox.display("Logout", "Are you sure you want to logout?");
             if(answer) // if the answer is yes
                 window.close(); // close the window
+        });
+        inventoryButton.setOnAction(event -> {
+            displayProducts();
         });
 
 //      Layout
@@ -226,5 +231,60 @@ public class UserBoxes {
         window.setScene(scene);
         window.initModality(Modality.APPLICATION_MODAL);
         window.showAndWait();
+    }
+
+    /** Window that allows someone to view all of the products in stock */
+    private static void displayProducts(){
+        Stage window = new Stage();
+        /* Scene */
+        // Objects
+        TableView<Product> productTableView = new TableView<>();
+
+        // name column
+        TableColumn<Product, String> nameColumn = new TableColumn<>("Name");
+        nameColumn.setMinWidth(200);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        // product number column
+        TableColumn<Product, Integer> productNumberColumn = new TableColumn<>("Product Number");
+        nameColumn.setMinWidth(200);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("productNumber"));
+
+        // product count column
+        TableColumn<Product, Integer> countColumn = new TableColumn<>("Number of items");
+        nameColumn.setMinWidth(200);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
+
+        // product price column
+        TableColumn<Product, Double> priceColumn = new TableColumn<>("Price");
+        nameColumn.setMinWidth(200);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        // add to table view
+        productTableView.setItems(getProducts());
+        productTableView.getColumns().addAll(nameColumn, productNumberColumn, countColumn, priceColumn);
+
+        // layout
+        VBox layout = new VBox(20);
+        layout.setAlignment(Pos.CENTER);
+        layout.getChildren().add(productTableView);
+
+        // scene
+        Scene scene = new Scene(layout, 400, 400);
+        // Window options
+        window.setTitle("Products view");
+        window.setScene(scene);
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.showAndWait();
+    }
+
+    private static ObservableList<Product> getProducts(){
+        ObservableList<Product> products = FXCollections.observableArrayList();
+        products.add(new Product("Candy Corn", 111, 480, 0.75));
+        products.add(new Product("Winter Jacket", 112, 14, 13.50));
+        products.add(new Product("Summer T-Shirt", 113, 78, 8.00));
+        products.add(new Product("Swim Trunks", 114, 42, 12.50));
+
+        return products;
     }
 }

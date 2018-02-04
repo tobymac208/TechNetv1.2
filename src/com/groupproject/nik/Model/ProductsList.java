@@ -14,9 +14,9 @@ public class ProductsList {
     public ArrayList<Product> getProductsList() {return productsList;}
 
     /** Adds a new Product to the list */
-    public void addPart(String name, int productNumber, int count){
+    public void addProduct(String name, int productNumber, int count, double price){
         if(productsList.isEmpty() || findByNumber(productNumber) == null ){ // no object found with same id, or the list is empty
-            productsList.add(new Product(name, productNumber, count)); // add a new product
+            productsList.add(new Product(name, productNumber, count, price)); // add a new product
         }
     }
 
@@ -28,5 +28,13 @@ public class ProductsList {
                 return product;
         }
         return null; // no objects found with the same number
+    }
+
+    public int getTotalCount(){
+        int count = 0;
+        for(Product product : productsList){
+            count += product.getCount(); // add up all the counts
+        }
+        return count;
     }
 }
