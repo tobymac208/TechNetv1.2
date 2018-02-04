@@ -31,6 +31,7 @@ public class AccountsList {
         return null; // nothing found
     }
 
+    /** Takes in a username, and returns an Account with the same username */
     public Account findByName(String username){
         if(accounts.isEmpty()) // no accounts to search through
             return null;
@@ -39,5 +40,18 @@ public class AccountsList {
                 return account; // found the account with the username
         }
         return null; // nothing found
+    }
+
+    /** Takes an account, and allows for an Account object's members to be updated if it's ID matches the one passed in */
+    public void updateById(Account account){
+        for(Account currentAccount : accounts){
+            if(currentAccount.getId() == account.getId()){ // if it's the same account
+                // set all of it's members equals to this one's -- since these members could have changed
+                currentAccount.setFirstName(account.getFirstName());
+                currentAccount.setLastName(account.getLastName());
+                currentAccount.setUsername(account.getUsername());
+                currentAccount.setPassword(account.getPassword());
+            }
+        }
     }
 }

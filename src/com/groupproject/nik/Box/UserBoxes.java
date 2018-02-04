@@ -23,7 +23,7 @@ public class UserBoxes {
     /** A window for viewing the Home of someone's login session -- takes in the current user's account */
     public static Account displayHome(Account currentAccount){
         Stage window = new Stage();
-        manipulatedAccount = currentAccount;
+        manipulatedAccount = currentAccount; // the user that's logged in has their object given off to manipulatedData
 
         /* Scene */
 //      Objects
@@ -37,10 +37,12 @@ public class UserBoxes {
         Label nameLabel = new Label("Name:");
         Label usernameLabel = new Label("Username:");
         Label ageLabel = new Label("Age:");
+        Label passwordLabel = new Label("Password:");
 
         Label nameFieldLabel = new Label(currentAccount.getFirstName() + " " + currentAccount.getLastName());
         Label usernameFieldLabel = new Label(currentAccount.getUsername());
         Label ageFieldLabel = new Label(currentAccount.getAge()+"");
+        Label passwordFieldLabel = new Label(currentAccount.getPassword());
 
 //      Events
         logoutButton.setOnAction(event -> {
@@ -49,7 +51,12 @@ public class UserBoxes {
                 window.close(); // close the window
         });
         settingsButton.setOnAction(event -> {
-            // Open settings window
+            displaySettings(manipulatedAccount);
+            // after method returns -- update fields in case the fields were changed
+            nameFieldLabel.setText(manipulatedAccount.getFirstName() + " " + manipulatedAccount.getLastName());
+            usernameFieldLabel.setText(manipulatedAccount.getUsername());
+            ageFieldLabel.setText(manipulatedAccount.getAge()+"");
+            passwordFieldLabel.setText(manipulatedAccount.getPassword());
         });
         window.setOnCloseRequest(event -> {
             event.consume();
@@ -74,11 +81,13 @@ public class UserBoxes {
         GridPane.setConstraints(nameLabel, 0, 0);
         GridPane.setConstraints(usernameLabel, 1, 0);
         GridPane.setConstraints(ageLabel, 2, 0);
+        GridPane.setConstraints(passwordLabel, 3, 0);
         GridPane.setConstraints(nameFieldLabel, 0, 1);
         GridPane.setConstraints(usernameFieldLabel, 1, 1);
         GridPane.setConstraints(ageFieldLabel, 2, 1);
+        GridPane.setConstraints(passwordFieldLabel, 3, 1);
         centerLayout.setAlignment(Pos.CENTER);
-        centerLayout.getChildren().addAll(nameLabel,usernameLabel, ageLabel, nameFieldLabel, usernameFieldLabel, ageFieldLabel);
+        centerLayout.getChildren().addAll(nameLabel,usernameLabel, ageLabel, nameFieldLabel, usernameFieldLabel, ageFieldLabel, passwordLabel, passwordFieldLabel);
 //      MAIN layout
         BorderPane.setMargin(topLayout, new Insets(10, 10, 10, 10));
         BorderPane.setMargin(leftLayout, new Insets(10, 10, 10, 10));
@@ -102,7 +111,7 @@ public class UserBoxes {
         window.initModality(Modality.APPLICATION_MODAL);
         window.showAndWait();
 
-        return currentAccount;
+        return manipulatedAccount; // return back the manipulatedAccount variable
     }
 
     /** Opens the settings window for the user */
@@ -113,7 +122,6 @@ public class UserBoxes {
         Label choiceLabel = new Label("Please choose below, as to what you'd like to modify:");
         ComboBox<String> stringComboBox = new ComboBox<>();
         stringComboBox.getItems().addAll("Username", "Password", "First Name", "Last Name");
-        stringComboBox.setValue("Username"); // by default, it is set to username
 
         Button submit = new Button("Complete");
 
@@ -136,7 +144,7 @@ public class UserBoxes {
             else
                 choice = 1; // change the username
 
-            changeField(theAccount, choice);
+            changeField(manipulatedAccount, choice);
         });
         window.setOnCloseRequest(event -> event.consume()); // don't let the user hit the X to exit
 
@@ -146,7 +154,8 @@ public class UserBoxes {
         layout.getChildren().addAll(choiceLabel, stringComboBox, submit);
 
         // scene
-        Scene scene = new Scene(layout, 200, 200);
+        Scene scene = new Scene(layout, 400, 400);
+        scene.getStylesheets().add("/com/groupproject/nik/main.css");
 
         // window
         window.setScene(scene);
@@ -211,6 +220,7 @@ public class UserBoxes {
         layout.getChildren().addAll(newFieldLabel, newField, copyFieldLabel, copyField, submit, successLabel);
         // Scene
         Scene scene = new Scene(layout, 400, 400);
+        scene.getStylesheets().add("/com/groupproject/nik/main.css");
         // Window
         window.setTitle("Change field");
         window.setScene(scene);

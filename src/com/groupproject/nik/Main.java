@@ -94,7 +94,9 @@ public class Main extends Application {
                     passwordField.clear();
 
                     // Open logged in window
-                    UserBoxes.displayHome(checkerAccount);
+                    Account receivedAccount = UserBoxes.displayHome(checkerAccount);
+                    // After the method returns, update the account's settings that were just used -- and possibly changed
+                    myList.updateById(receivedAccount);
                 }else{
                     errorLabel.setStyle("-fx-text-fill: red");
                     errorLabel.setText("ERROR: Wrong password");
