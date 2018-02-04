@@ -5,3 +5,4 @@
 #### Username | Password
 #### mike_polanksy32 | myPassword
 #### guestUser1 | password
+> Author: Nik
