@@ -19,8 +19,7 @@
     -fx-background-color: #E8E8E8;
 }
 
-.hbox {
-    -fx-background-color: #2f4f4f;
-    -fx-padding: 15;
-    -fx-spacing: 10;
+.vbox {
+    -fx-border-color: green;
+    -fx-border-style: dashed;
 }

@@ -18,13 +18,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class Main extends Application {
     private static Stage mainWindow;
     private static AccountsList myList;
 
     public static void main(String[] args) {
         myList = new AccountsList();
-        myList.addAccount("mike_polanksy32", "myPassword", "Mike", "Jenkins", 57, 1, true);
+        myList.addAccount("mike_polanksy32", "myPassword", "Mike", "Jenkins", 57, 1, false);
+        myList.addAccount("guestUser1", "password", "Guest", "User", 0, 2, false);
+        myList.addAccount("root", "password", "root", "user", 99, 3, true);
 
         launch(args);
     }
@@ -63,9 +67,16 @@ public class Main extends Application {
 //      TODO: 2. Add events
         // TOP events
         aboutButton.setOnAction(event -> {
-            DisplayViewBox.display("About Page", "Author", "Nik Fernandez; 20 years old.\nHas a novice level of experience with various programming languages.", "Description",
-                    "This program was created as one of many series of tests on my knowledge of JavaFX", "Revisions",
-                    "02/04/2018: Created application. Added main windows and functionality (i.e., main window, confirm window, about window, quit functionality, added stylesheet).");
+            ArrayList<String> labels = new ArrayList<>();
+            labels.add("Author");
+            labels.add("Description");
+            labels.add("Revisions");
+            ArrayList<String> information = new ArrayList<>();
+            information.add("Nik Fernandez; 20 years old.\nHas a novice level of experience with various programming languages.");
+            information.add("This program is for a fictitious corporation called \"TechNet\"; they are a distributor of various commodities.");
+            information.add("02/04/2018: Created application. Added main windows and functionality (i.e., main window, confirm window, about window, quit functionality, added stylesheet).");
+
+            DisplayViewBox.displayMultiple("About Page", labels, information);
         });
         quitButton.setOnAction(event -> closeOperation());
         // CENTER events
@@ -101,7 +112,7 @@ public class Main extends Application {
         // layout
         // TOP layout
         HBox topLayout = new HBox(20);
-        topLayout.setAlignment(Pos.TOP_LEFT);
+        topLayout.setAlignment(Pos.TOP_CENTER);
         topLayout.getChildren().addAll(quitButton, aboutButton);
         // CENTER Layout
         GridPane.setConstraints(usernameLabel, 0, 0);

@@ -6,7 +6,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -33,11 +32,9 @@ public class UserBoxes {
         Label optionsLabel = new Label("Window Options");
         Button inventoryButton = new Button("Inventory");
 //      CENTER objects
-        TextArea informationArea = new TextArea();
-        informationArea.setText("Username: " + currentAccount.getUsername() + "\n"
-        + "First name: " + currentAccount.getFirstName() + "\n"
-        + "Last name: " + currentAccount.getLastName() + "\n"
-        + "Age: " + currentAccount.getAge() + "\n");
+        Label nameLabel = new Label("Name: " + currentAccount.getFirstName() + " " + currentAccount.getLastName());
+        Label usernameLabel = new Label("Username: " + currentAccount.getUsername());
+        Label ageLabel = new Label("Age: " + currentAccount.getAge());
 
 //      Events
         logoutButton.setOnAction(event -> {
@@ -58,20 +55,24 @@ public class UserBoxes {
 //      Layout
 //      TOP layout
         HBox topLayout = new HBox(10);
+        topLayout.setAlignment(Pos.TOP_CENTER);
         topLayout.getChildren().setAll(logoutButton, settingsButton);
 //      LEFT layout
         VBox leftLayout = new VBox(10);
         leftLayout.setAlignment(Pos.CENTER);
         leftLayout.getChildren().addAll(optionsLabel, inventoryButton);
+//      CENTER layout
+        VBox centerLayout = new VBox(40);
+        centerLayout.getChildren().addAll(nameLabel, usernameLabel, ageLabel);
 //      MAIN layout
         BorderPane.setMargin(topLayout, new Insets(10, 10, 10, 10));
         BorderPane.setMargin(leftLayout, new Insets(10, 10, 10, 10));
-        BorderPane.setMargin(informationArea, new Insets(10, 10, 10, 10));
+        BorderPane.setMargin(centerLayout, new Insets(10,10, 10, 10));
 
         BorderPane mainLayout = new BorderPane();
         mainLayout.setTop(topLayout);
         mainLayout.setLeft(leftLayout);
-        mainLayout.setCenter(informationArea);
+        mainLayout.setCenter(centerLayout);
 
 //      Scene options
         Scene mainScene = new Scene(mainLayout, 600, 400);
