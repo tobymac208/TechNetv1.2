@@ -1,5 +1,12 @@
 package com.groupproject.nik.Box;
 
+/*
+ * Created on February 3rd, 2018
+ * Author: Nik
+ * Title TechNet
+ * Description: A basic warehouse application for a fictitious corporation named TechNet
+ */
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;

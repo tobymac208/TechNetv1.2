@@ -71,9 +71,17 @@ public class Main extends Application {
             labels.add("Author");
             labels.add("Description");
             labels.add("Revisions");
+            labels.add("Revisions");
+            labels.add("Revisions");
+            labels.add("Revisions");
+            labels.add("Revisions");
             ArrayList<String> information = new ArrayList<>();
             information.add("Nik Fernandez; 20 years old.\nHas a novice level of experience with various programming languages.");
             information.add("This program is for a fictitious corporation called \"TechNet\"; they are a distributor of various commodities.");
+            information.add("02/04/2018: Created application. Added main windows and functionality (i.e., main window, confirm window, about window, quit functionality, added stylesheet).");
+            information.add("02/04/2018: Created application. Added main windows and functionality (i.e., main window, confirm window, about window, quit functionality, added stylesheet).");
+            information.add("02/04/2018: Created application. Added main windows and functionality (i.e., main window, confirm window, about window, quit functionality, added stylesheet).");
+            information.add("02/04/2018: Created application. Added main windows and functionality (i.e., main window, confirm window, about window, quit functionality, added stylesheet).");
             information.add("02/04/2018: Created application. Added main windows and functionality (i.e., main window, confirm window, about window, quit functionality, added stylesheet).");
 
             DisplayViewBox.displayMultiple("About Page", labels, information);
