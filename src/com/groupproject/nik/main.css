@@ -1,15 +1,26 @@
 .root{
-    -fx-background-color: #383838;
+    -fx-background-color: #282828;
     -fx-font-size: 12px;
 }
 
 .label{
     -fx-text-fill: #e8e8e8;
+    -fx-font-size: 14;
 }
+
 .button{
     -fx-background-radius: 5;
-    -fx-min-width: 20px;
+    -fx-min-width: 45px;
+    -fx-text-fill: #7CAFC2;
+    -fx-background-color: #383838;
 }
+
 .button:hover{
-    -fx-background-color: #ab4642;
+    -fx-background-color: #E8E8E8;
+}
+
+.hbox {
+    -fx-background-color: #2f4f4f;
+    -fx-padding: 15;
+    -fx-spacing: 10;
 }
