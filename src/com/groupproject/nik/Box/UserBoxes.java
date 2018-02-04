@@ -2,7 +2,6 @@ package com.groupproject.nik.Box;
 
 import com.groupproject.nik.Model.Account;
 import com.groupproject.nik.Model.Product;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -247,18 +246,18 @@ public class UserBoxes {
 
         // product number column
         TableColumn<Product, Integer> productNumberColumn = new TableColumn<>("Product Number");
-        nameColumn.setMinWidth(200);
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("productNumber"));
+        productNumberColumn.setMinWidth(200);
+        productNumberColumn.setCellValueFactory(new PropertyValueFactory<>("productNumber"));
 
         // product count column
         TableColumn<Product, Integer> countColumn = new TableColumn<>("Number of items");
-        nameColumn.setMinWidth(200);
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
+        countColumn.setMinWidth(200);
+        countColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
 
         // product price column
         TableColumn<Product, Double> priceColumn = new TableColumn<>("Price");
-        nameColumn.setMinWidth(200);
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        priceColumn.setMinWidth(200);
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         // add to table view
         productTableView.setItems(getProducts());

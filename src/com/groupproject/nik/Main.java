@@ -115,6 +115,7 @@ public class Main extends Application {
         // layout
         // TOP layout
         HBox topLayout = new HBox(20);
+        topLayout.getStyleClass().add("hbox");
         topLayout.setAlignment(Pos.TOP_CENTER);
         topLayout.getChildren().addAll(quitButton, aboutButton);
         // CENTER Layout
@@ -132,6 +133,7 @@ public class Main extends Application {
         // LEFT layout
         // BOTTOM layout
         HBox bottomLayout = new HBox(20);
+        bottomLayout.getStyleClass().add("hbox");
         bottomLayout.getChildren().addAll(authorLabel, copyrightLabel);
         // MAIN layout
         BorderPane mainLayout = new BorderPane();

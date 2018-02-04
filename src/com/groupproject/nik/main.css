@@ -19,7 +19,7 @@
     -fx-background-color: #E8E8E8;
 }
 
-.vbox {
+.hbox {
     -fx-border-color: green;
     -fx-border-style: dashed;
 }
