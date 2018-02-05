@@ -35,6 +35,7 @@ public class ConfirmBox {
             userResponse = false;
             window.close();
         });
+        window.setOnCloseRequest(event -> event.consume()); // disables the close button
 
         // layout
         VBox layout = new VBox(20);
