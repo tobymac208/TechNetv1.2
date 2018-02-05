@@ -115,7 +115,7 @@ public class Main extends Application {
         // layout
         // TOP layout
         HBox topLayout = new HBox(20);
-        topLayout.getStyleClass().add("hbox");
+        topLayout.getStyleClass().add("stylized-box");
         topLayout.setAlignment(Pos.TOP_CENTER);
         topLayout.getChildren().addAll(quitButton, aboutButton);
         // CENTER Layout
@@ -127,13 +127,14 @@ public class Main extends Application {
         GridPane.setConstraints(errorLabel, 0, 3);
         GridPane centerLayout = new GridPane();
         centerLayout.setAlignment(Pos.CENTER);
+        centerLayout.getStyleClass().add("stylized-box");
         centerLayout.setVgap(30);
         centerLayout.setHgap(30);
         centerLayout.getChildren().setAll(usernameLabel, usernameField, passwordLabel, passwordField, submitButton, errorLabel);
         // LEFT layout
         // BOTTOM layout
         HBox bottomLayout = new HBox(20);
-        bottomLayout.getStyleClass().add("hbox");
+        bottomLayout.getStyleClass().add("stylized-box");
         bottomLayout.getChildren().addAll(authorLabel, copyrightLabel);
         // MAIN layout
         BorderPane mainLayout = new BorderPane();

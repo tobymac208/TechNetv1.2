@@ -19,7 +19,8 @@
     -fx-background-color: #E8E8E8;
 }
 
-.hbox {
-    -fx-border-color: green;
-    -fx-border-style: dashed;
+.stylized-box {
+    -fx-border-color: #585858;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
 }

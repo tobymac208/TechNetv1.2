@@ -73,9 +73,11 @@ public class UserBoxes {
 //      TOP layout
         HBox topLayout = new HBox(10);
         topLayout.setAlignment(Pos.TOP_CENTER);
+        topLayout.getStyleClass().add("stylized-box");
         topLayout.getChildren().setAll(logoutButton, settingsButton);
 //      LEFT layout
         VBox leftLayout = new VBox(10);
+        leftLayout.getStyleClass().add("stylized-box");
         leftLayout.setAlignment(Pos.CENTER);
         leftLayout.getChildren().addAll(optionsLabel, inventoryButton);
 //      CENTER layout
@@ -91,6 +93,7 @@ public class UserBoxes {
         GridPane.setConstraints(ageFieldLabel, 2, 1);
         GridPane.setConstraints(passwordFieldLabel, 3, 1);
         centerLayout.setAlignment(Pos.CENTER);
+        centerLayout.getStyleClass().add("stylized-box");
         centerLayout.getChildren().addAll(nameLabel,usernameLabel, ageLabel, nameFieldLabel, usernameFieldLabel, ageFieldLabel, passwordLabel, passwordFieldLabel);
 //      MAIN layout
         BorderPane.setMargin(topLayout, new Insets(10, 10, 10, 10));
@@ -221,6 +224,7 @@ public class UserBoxes {
         // layout
         VBox layout = new VBox(20);
         layout.setAlignment(Pos.CENTER);
+        layout.getStyleClass().add("stylized-box");
         layout.getChildren().addAll(newFieldLabel, newField, copyFieldLabel, copyField, submit, successLabel);
         // Scene
         Scene scene = new Scene(layout, 400, 400);
@@ -266,6 +270,7 @@ public class UserBoxes {
         // layout
         VBox layout = new VBox(20);
         layout.setAlignment(Pos.CENTER);
+        layout.getStyleClass().add("stylized-box");
         layout.getChildren().add(productTableView);
 
         // scene
