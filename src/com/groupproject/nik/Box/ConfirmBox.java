@@ -25,6 +25,8 @@ public class ConfirmBox {
         Label promptLabel = new Label(prompt);
         Button yesButton = new Button("Yes");
         Button noButton = new Button("No");
+        // This is a label to tell the user that they must use the Yes or No button to exit this screen
+        Label errorLabel = new Label("");
 
         // events
         yesButton.setOnAction(event -> {
@@ -35,15 +37,20 @@ public class ConfirmBox {
             userResponse = false;
             window.close();
         });
-        window.setOnCloseRequest(event -> event.consume()); // disables the close button
+        window.setOnCloseRequest(event -> {
+            event.consume(); // stop the close operation
+            // tell the user to use one of the buttons to close this window
+            errorLabel.setStyle("-fx-text-fill: red"); // make the text red
+            errorLabel.setText("ERROR: You must choose Yes or No"); // sets the text to an error message
+        }); // disables the close button
 
         // layout
         VBox layout = new VBox(20);
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().setAll(promptLabel, yesButton, noButton);
+        layout.getChildren().setAll(promptLabel, yesButton, noButton, errorLabel);
 
         // Scene
-        Scene mainScene = new Scene(layout, 200, 200);
+        Scene mainScene = new Scene(layout, 300, 300);
         // STYLESHEET
         mainScene.getStylesheets().add("/com/groupproject/nik/main.css");
 
