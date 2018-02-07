@@ -18,8 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -97,6 +96,8 @@ public class Main extends Application {
                     Account receivedAccount = UserBoxes.displayHome(checkerAccount);
                     // After the method returns, update the account's settings that were just used -- and possibly changed
                     myList.updateById(receivedAccount);
+                    // after the account is updated, re-write to the file
+                    updateAccounts(); // updates the accounts
                 }else{
                     errorLabel.setStyle("-fx-text-fill: red");
                     errorLabel.setText("ERROR: Wrong password");
@@ -158,8 +159,15 @@ public class Main extends Application {
             mainWindow.close(); // close the window
     }
 
-    public static void updateAccounts(){
-
+    /** Writes all of the current account data to login-data.txt file */
+    private static void updateAccounts(){
+        try(PrintWriter writer = new PrintWriter("src/com/groupproject/nik/Resources/login-data.txt")){ // try-with-resources block -- automatically closes the PrintWriter when it's done
+            for(Account account : myList.getAccounts()){ // for-each object in myList.getAccounts() (for-each object in my accounts list)
+                writer.printf("%s, %s, %s, %s, %s, %s, %s%n", account.getUsername(), account.getPassword(), account.getFirstName(), account.getLastName(), account.getAge(), account.getId(), account.isAdmin()); // print a formatted string to the file
+            }
+        }catch (IOException e){ // caught the IO-exception
+            e.printStackTrace();
+        }
     }
 
     /** Reads from the login-data.txt file, grabs the information, splits/parses it, adds the account to the list, and then returns the whole list object */
@@ -172,6 +180,8 @@ public class Main extends Application {
             Scanner fileReader = new Scanner(file);
             while(fileReader.hasNextLine()){
                 String currentLine = fileReader.nextLine();
+                if(currentLine.equals("")) // line is empty
+                    break; // break out of the loop -- it can't populate the values with nothing, so exit the loop
                 // split up the line
                 String strings[] = currentLine.split(", "); // creates 7 strings with each value passed into it -- the delimiter is ", " (comma and a space)
                 // feed each value into a new Account object
@@ -200,7 +210,8 @@ public class Main extends Application {
                 // Populate a new Account object, which the data received
                 myLocalList.addAccount(username, password, firstname, lastname, age, id, isAdmin); // creates a new account
             }
-        }catch(FileNotFoundException exception){
+            fileReader.close(); // close the file
+        }catch(FileNotFoundException exception) {
             exception.printStackTrace();
         }
         return myLocalList;

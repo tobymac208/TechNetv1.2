@@ -1,2 +1,2 @@
-root, password, mike, jenkins, 22, 1, true
+dude, password, mike, jenkins, 22, 1, true
 user1, password, firstName, lastName, 0, 2, false
