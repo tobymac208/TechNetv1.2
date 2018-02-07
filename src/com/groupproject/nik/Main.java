@@ -29,6 +29,11 @@ public class Main extends Application {
     public static void main(String[] args) {
         myList = loadInAccounts(); // initializes the myList object to the accounts received from the file
 
+        // This for the artifact
+        if(myList.getAccounts().isEmpty()){ // nothing was read in
+            myList.addAccount("root", "password", "mike", "smith", 48, 1, true);
+        }
+
         launch(args);
     }
 
