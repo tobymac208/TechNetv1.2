@@ -92,7 +92,7 @@ public class RegisterAccount {
             }
 
             // check the make sure all of the fields have something in them
-            if(!newAccount.getFirstName().equals("") && !newAccount.getLastName().equals("") && newAccount.getAge() != 0 && !newAccount.getUsername().equals("")){
+            if(!newAccount.getFirstName().equals("") && !newAccount.getLastName().equals("") && newAccount.getAge() != 0 && !newAccount.getUsername().equals("") && !newAccount.getPassword().equals("")){
                 mainWindow.close();
             }else{
                 errorLabel.setStyle("-fx-text-fill: red"); // color is red

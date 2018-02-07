@@ -1,1 +1,2 @@
 root, password, mike, jenkins, 22, true
+user1, password, mike, mike, 22, false
