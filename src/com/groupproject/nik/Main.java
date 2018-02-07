@@ -28,8 +28,10 @@ public class Main extends Application {
     private static AccountsList myList;
 
     public static void main(String[] args) {
+        myList = new AccountsList(); // initializes the myList object
+        // create a file object to read from
+        File file = new File("src/com/groupproject/nik/Resources/login-data.txt");
         try{
-            File file = new File("/src/com/groupproject/nik/Resources/login-data.txt");
             Scanner fileReader = new Scanner(file);
             while(fileReader.hasNextLine()){
                 String currentLine = fileReader.nextLine();
@@ -38,7 +40,7 @@ public class Main extends Application {
                 // feed each value into a new Account object
                 // username, password, first name, last name, age, id, and if it is or isn't an admin
                 String username, password, firstname, lastname;
-                int age, id;
+                int age = 0, id = 0;
                 boolean isAdmin;
                 username = strings[0]; // the first string found
                 password = strings[1];
@@ -58,15 +60,12 @@ public class Main extends Application {
                 else{ // nope, it must be "false"
                     isAdmin = false;
                 }
+                // Populate a new Account object, which the data received
+                myList.addAccount(username, password, firstname, lastname, age, id, isAdmin); // creates a new account
             }
         }catch(FileNotFoundException exception){
             exception.printStackTrace();
         }
-
-        myList = new AccountsList();
-        myList.addAccount("mike_polanksy32", "myPassword", "Mike", "Jenkins", 57, 1, false);
-        myList.addAccount("guestUser1", "password", "Guest", "User", 0, 2, false);
-        myList.addAccount("root", "password", "root", "user", 99, 3, true);
 
         launch(args);
     }

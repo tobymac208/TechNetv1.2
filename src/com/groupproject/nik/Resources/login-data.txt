@@ -1,0 +1,2 @@
+root, password, mike, jenkins, 22, 1, true
+kevin_loves_mariah-carey, password, kevin, fernandez, 23, 2, false
