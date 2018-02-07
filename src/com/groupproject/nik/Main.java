@@ -18,13 +18,51 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main extends Application {
     private static Stage mainWindow;
     private static AccountsList myList;
 
     public static void main(String[] args) {
+        try{
+            File file = new File("/src/com/groupproject/nik/Resources/login-data.txt");
+            Scanner fileReader = new Scanner(file);
+            while(fileReader.hasNextLine()){
+                String currentLine = fileReader.nextLine();
+                // split up the line
+                String strings[] = currentLine.split(", "); // creates 7 strings with each value passed into it -- the delimiter is ", " (comma and a space)
+                // feed each value into a new Account object
+                // username, password, first name, last name, age, id, and if it is or isn't an admin
+                String username, password, firstname, lastname;
+                int age, id;
+                boolean isAdmin;
+                username = strings[0]; // the first string found
+                password = strings[1];
+                firstname = strings[2];
+                lastname = strings[3];
+                try{
+                    // parse the age and id into integer values -- converting it to an int and storing it in the int variables
+                    age = Integer.parseInt(strings[4]);
+                    id = Integer.parseInt(strings[5]);
+                }catch (NumberFormatException e){
+                    e.printStackTrace();
+                }
+                // figure out if it's true or false
+                if(strings[6].equals("true")){ // is the string "true"?
+                    isAdmin = true;
+                }
+                else{ // nope, it must be "false"
+                    isAdmin = false;
+                }
+            }
+        }catch(FileNotFoundException exception){
+            exception.printStackTrace();
+        }
+
         myList = new AccountsList();
         myList.addAccount("mike_polanksy32", "myPassword", "Mike", "Jenkins", 57, 1, false);
         myList.addAccount("guestUser1", "password", "Guest", "User", 0, 2, false);
@@ -38,7 +76,7 @@ public class Main extends Application {
         // Icon image
         Image image = new Image("/com/groupproject/nik/Photos/awesome_deep_space.jpg");
         window.getIcons().addAll(image);
-        // TODO: 1. Make main GUI -- Possible objects: ComboBox, ChoiceBox, CheckBox, TableView, ListView
+        // DONE: 1. Make main GUI -- Possible objects: ComboBox, ChoiceBox, CheckBox, TableView, ListView
         /* MAIN scene */
 
         /* Objects */
@@ -64,7 +102,7 @@ public class Main extends Application {
         Label copyrightLabel = new Label("Copyright @ 2018 Bell Labz. All rights reserved.");
 
         /* Events */
-//      TODO: 2. Add events
+//      DONE: 2. Add events
         // TOP events
         aboutButton.setOnAction(event -> {
             ArrayList<String> labels = new ArrayList<>();
@@ -82,7 +120,7 @@ public class Main extends Application {
         quitButton.setOnAction(event -> closeOperation());
         // CENTER events
         submitButton.setOnAction(event -> {
-            // TODO: Open window for login page
+            // DONE: Open window for login page
             Account checkerAccount = myList.findByName(usernameField.getText());
             if(checkerAccount != null){
                 if(checkerAccount.getPassword().equals(passwordField.getText())){ // checks if the account's associated password is equal to the password entered
@@ -145,7 +183,7 @@ public class Main extends Application {
         // SCENE
         Scene mainScene = new Scene(mainLayout, 600, 400);
         // STYLESHEET
-        mainScene.getStylesheets().add("/com/groupproject/nik/main.css");
+        mainScene.getStylesheets().add("/com/groupproject/nik/Resources/main.css");
 
         // window options
         mainWindow.setTitle("TechNet's System v1.2");

@@ -60,7 +60,7 @@ public class DisplayViewBox {
         // scene
         Scene mainScene = new Scene(layout, 600, 400);
         // STYLESHEET
-        mainScene.getStylesheets().add("/com/groupproject/nik/main.css");
+        mainScene.getStylesheets().add("/com/groupproject/nik/Resources/main.css");
 
         // window
         window.setTitle(windowTitle);
@@ -108,7 +108,7 @@ public class DisplayViewBox {
         // scene
         Scene mainScene = new Scene(layout, 600, 400);
         // STYLESHEET
-        mainScene.getStylesheets().add("/com/groupproject/nik/main.css");
+        mainScene.getStylesheets().add("/com/groupproject/nik/Resources/main.css");
 
         // window
         window.setTitle(windowTitle);

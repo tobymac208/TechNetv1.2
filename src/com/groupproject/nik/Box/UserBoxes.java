@@ -107,7 +107,7 @@ public class UserBoxes {
 
 //      Scene options
         Scene mainScene = new Scene(mainLayout, 600, 400);
-        mainScene.getStylesheets().add("/com/groupproject/nik/main.css");
+        mainScene.getStylesheets().add("/com/groupproject/nik/Resources/main.css");
 
         // Window options
         // Icon image
@@ -162,7 +162,7 @@ public class UserBoxes {
 
         // scene
         Scene scene = new Scene(layout, 400, 400);
-        scene.getStylesheets().add("/com/groupproject/nik/main.css");
+        scene.getStylesheets().add("/com/groupproject/nik/Resources/main.css");
 
         // window
         window.setScene(scene);
@@ -228,7 +228,7 @@ public class UserBoxes {
         layout.getChildren().addAll(newFieldLabel, newField, copyFieldLabel, copyField, submit, successLabel);
         // Scene
         Scene scene = new Scene(layout, 400, 400);
-        scene.getStylesheets().add("/com/groupproject/nik/main.css");
+        scene.getStylesheets().add("/com/groupproject/nik/Resources/main.css");
         // Window
         window.setTitle("Change field");
         window.setScene(scene);

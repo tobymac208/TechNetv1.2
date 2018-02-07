@@ -52,7 +52,7 @@ public class ConfirmBox {
         // Scene
         Scene mainScene = new Scene(layout, 300, 300);
         // STYLESHEET
-        mainScene.getStylesheets().add("/com/groupproject/nik/main.css");
+        mainScene.getStylesheets().add("/com/groupproject/nik/Resources/main.css");
 
         // window options
         window.setTitle(windowTitle);
