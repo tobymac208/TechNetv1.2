@@ -13,11 +13,11 @@ public class AccountsList {
     public ArrayList<Account> getAccounts() {return accounts;}
 
     /** Creates a new account */
-    public void addAccount(String username, String password, String firstName, String lastName, int age, int id, boolean isAdmin){
-        if(accounts.isEmpty() || findByID(id) == null){ // if there are no accounts, or no accounts with the same id, add a new account with the info provided
-            accounts.add(new Account(username, password, firstName, lastName, age, id, isAdmin));
+    public void addAccount(String username, String password, String firstName, String lastName, int age, boolean isAdmin){
+        if(accounts.isEmpty() || findByName(username) == null){ // if there are no accounts, or there's an account with the same name, add a new account with the info provided
+            accounts.add(new Account(username, password, firstName, lastName, age, isAdmin));
         }else // give error message
-            System.out.println("Copy of ID on existing account. Can't create new account under the username: " + username);
+            System.out.println("Copy of username on existing account. Can't create new account under the username: " + username);
     }
 
     /** Helps other methods of this class when they need to search an Account by id */

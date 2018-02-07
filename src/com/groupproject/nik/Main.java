@@ -2,6 +2,7 @@ package com.groupproject.nik;
 
 import com.groupproject.nik.Box.ConfirmBox;
 import com.groupproject.nik.Box.DisplayViewBox;
+import com.groupproject.nik.Box.RegisterAccount;
 import com.groupproject.nik.Box.UserBoxes;
 import com.groupproject.nik.Model.Account;
 import com.groupproject.nik.Model.AccountsList;
@@ -25,13 +26,15 @@ import java.util.Scanner;
 public class Main extends Application {
     private static Stage mainWindow;
     private static AccountsList myList;
+    // keeps track of how many other users have been created
+    private static int currentAddedID = 0;
 
     public static void main(String[] args) {
         myList = loadInAccounts(); // initializes the myList object to the accounts received from the file
 
         // This for the artifact
         if(myList.getAccounts().isEmpty()){ // nothing was read in
-            myList.addAccount("root", "password", "mike", "smith", 48, 1, true);
+            myList.addAccount("root", "password", "mike", "smith", 48, true);
         }
 
         launch(args);
@@ -60,6 +63,7 @@ public class Main extends Application {
         passwordField.setPromptText("Enter your password");
 
         Button submitButton = new Button("Login");
+        Button registerButton = new Button("Register");
 
         Label errorLabel = new Label("");
 
@@ -70,6 +74,12 @@ public class Main extends Application {
         /* Events */
 //      DONE: 2. Add events
         // TOP events
+        // Create a new account with the information provided
+        registerButton.setOnAction(event -> {
+            Account newAccount = RegisterAccount.createAccount();
+            myList.addAccount(newAccount.getUsername(), newAccount.getPassword(), newAccount.getFirstName(), newAccount.getLastName(), newAccount.getAge(), false);
+            updateAccounts(); // rewrite all accounts to the file
+        });
         aboutButton.setOnAction(event -> {
             ArrayList<String> labels = new ArrayList<>();
             labels.add("Author");
@@ -130,13 +140,14 @@ public class Main extends Application {
         GridPane.setConstraints(passwordLabel, 0, 1);
         GridPane.setConstraints(passwordField, 1, 1);
         GridPane.setConstraints(submitButton, 0, 2);
+        GridPane.setConstraints(registerButton, 1, 2);
         GridPane.setConstraints(errorLabel, 0, 3);
         GridPane centerLayout = new GridPane();
         centerLayout.setAlignment(Pos.CENTER);
         centerLayout.getStyleClass().add("stylized-box");
         centerLayout.setVgap(30);
         centerLayout.setHgap(30);
-        centerLayout.getChildren().setAll(usernameLabel, usernameField, passwordLabel, passwordField, submitButton, errorLabel);
+        centerLayout.getChildren().setAll(usernameLabel, usernameField, passwordLabel, passwordField, submitButton, registerButton, errorLabel);
         // LEFT layout
         // BOTTOM layout
         HBox bottomLayout = new HBox(20);
@@ -168,7 +179,7 @@ public class Main extends Application {
     private static void updateAccounts(){
         try(PrintWriter writer = new PrintWriter("src/com/groupproject/nik/Resources/login-data.txt")){ // try-with-resources block -- automatically closes the PrintWriter when it's done
             for(Account account : myList.getAccounts()){ // for-each object in myList.getAccounts() (for-each object in my accounts list)
-                writer.printf("%s, %s, %s, %s, %s, %s, %s%n", account.getUsername(), account.getPassword(), account.getFirstName(), account.getLastName(), account.getAge(), account.getId(), account.isAdmin()); // print a formatted string to the file
+                writer.printf("%s, %s, %s, %s, %s, %s%n", account.getUsername(), account.getPassword(), account.getFirstName(), account.getLastName(), account.getAge(), account.isAdmin()); // print a formatted string to the file
             }
         }catch (IOException e){ // caught the IO-exception
             e.printStackTrace();
@@ -192,7 +203,7 @@ public class Main extends Application {
                 // feed each value into a new Account object
                 // username, password, first name, last name, age, id, and if it is or isn't an admin
                 String username, password, firstname, lastname;
-                int age = 0, id = 0;
+                int age = 0;
                 boolean isAdmin;
                 username = strings[0]; // the first string found
                 password = strings[1];
@@ -201,19 +212,18 @@ public class Main extends Application {
                 try{
                     // parse the age and id into integer values -- converting it to an int and storing it in the int variables
                     age = Integer.parseInt(strings[4]);
-                    id = Integer.parseInt(strings[5]);
                 }catch (NumberFormatException e){
                     e.printStackTrace();
                 }
                 // figure out if it's true or false
-                if(strings[6].equals("true")){ // is the string "true"?
+                if(strings[5].equals("true")){ // is the string "true"?
                     isAdmin = true;
                 }
                 else{ // nope, it must be "false"
                     isAdmin = false;
                 }
                 // Populate a new Account object, which the data received
-                myLocalList.addAccount(username, password, firstname, lastname, age, id, isAdmin); // creates a new account
+                myLocalList.addAccount(username, password, firstname, lastname, age, isAdmin); // creates a new account
             }
             fileReader.close(); // close the file
         }catch(FileNotFoundException exception) {

@@ -6,7 +6,7 @@ public class Account {
     private String firstName;
     private String lastName;
     private int age;
-    private int id;
+    private static int id; // auto-increment
     private boolean isAdmin;
 
     public Account(){
@@ -15,16 +15,16 @@ public class Account {
         this.firstName = "";
         this.lastName = "";
         this.age = 0;
-        this.id = 0;
+        id++;
         this.isAdmin = false;
     }
-    public Account(String username, String password, String firstName, String lastName, int age, int id, boolean isAdmin) {
+    public Account(String username, String password, String firstName, String lastName, int age, boolean isAdmin) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.id = id;
+        id++;
         this.isAdmin = isAdmin;
     }
 
@@ -50,7 +50,6 @@ public class Account {
 
     // id
     public int getId() {return id;}
-    public void setId(int id) {this.id = id;}
 
     // isAdmin
     public boolean isAdmin(){return isAdmin;}
