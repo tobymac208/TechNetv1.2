@@ -28,44 +28,7 @@ public class Main extends Application {
     private static AccountsList myList;
 
     public static void main(String[] args) {
-        myList = new AccountsList(); // initializes the myList object
-        // create a file object to read from
-        File file = new File("src/com/groupproject/nik/Resources/login-data.txt");
-        try{
-            Scanner fileReader = new Scanner(file);
-            while(fileReader.hasNextLine()){
-                String currentLine = fileReader.nextLine();
-                // split up the line
-                String strings[] = currentLine.split(", "); // creates 7 strings with each value passed into it -- the delimiter is ", " (comma and a space)
-                // feed each value into a new Account object
-                // username, password, first name, last name, age, id, and if it is or isn't an admin
-                String username, password, firstname, lastname;
-                int age = 0, id = 0;
-                boolean isAdmin;
-                username = strings[0]; // the first string found
-                password = strings[1];
-                firstname = strings[2];
-                lastname = strings[3];
-                try{
-                    // parse the age and id into integer values -- converting it to an int and storing it in the int variables
-                    age = Integer.parseInt(strings[4]);
-                    id = Integer.parseInt(strings[5]);
-                }catch (NumberFormatException e){
-                    e.printStackTrace();
-                }
-                // figure out if it's true or false
-                if(strings[6].equals("true")){ // is the string "true"?
-                    isAdmin = true;
-                }
-                else{ // nope, it must be "false"
-                    isAdmin = false;
-                }
-                // Populate a new Account object, which the data received
-                myList.addAccount(username, password, firstname, lastname, age, id, isAdmin); // creates a new account
-            }
-        }catch(FileNotFoundException exception){
-            exception.printStackTrace();
-        }
+        myList = loadInAccounts(); // initializes the myList object to the accounts received from the file
 
         launch(args);
     }
@@ -193,5 +156,53 @@ public class Main extends Application {
         boolean answer = ConfirmBox.display("Are you sure?", "Are you sure you want to quit?");
         if(answer)
             mainWindow.close(); // close the window
+    }
+
+    public static void updateAccounts(){
+
+    }
+
+    /** Reads from the login-data.txt file, grabs the information, splits/parses it, adds the account to the list, and then returns the whole list object */
+    private static AccountsList loadInAccounts(){
+        // Variable for storing local Account objects that were taken from the file
+        AccountsList  myLocalList = new AccountsList();
+        // create a file object to read from
+        File file = new File("src/com/groupproject/nik/Resources/login-data.txt");
+        try{
+            Scanner fileReader = new Scanner(file);
+            while(fileReader.hasNextLine()){
+                String currentLine = fileReader.nextLine();
+                // split up the line
+                String strings[] = currentLine.split(", "); // creates 7 strings with each value passed into it -- the delimiter is ", " (comma and a space)
+                // feed each value into a new Account object
+                // username, password, first name, last name, age, id, and if it is or isn't an admin
+                String username, password, firstname, lastname;
+                int age = 0, id = 0;
+                boolean isAdmin;
+                username = strings[0]; // the first string found
+                password = strings[1];
+                firstname = strings[2];
+                lastname = strings[3];
+                try{
+                    // parse the age and id into integer values -- converting it to an int and storing it in the int variables
+                    age = Integer.parseInt(strings[4]);
+                    id = Integer.parseInt(strings[5]);
+                }catch (NumberFormatException e){
+                    e.printStackTrace();
+                }
+                // figure out if it's true or false
+                if(strings[6].equals("true")){ // is the string "true"?
+                    isAdmin = true;
+                }
+                else{ // nope, it must be "false"
+                    isAdmin = false;
+                }
+                // Populate a new Account object, which the data received
+                myLocalList.addAccount(username, password, firstname, lastname, age, id, isAdmin); // creates a new account
+            }
+        }catch(FileNotFoundException exception){
+            exception.printStackTrace();
+        }
+        return myLocalList;
     }
 }
